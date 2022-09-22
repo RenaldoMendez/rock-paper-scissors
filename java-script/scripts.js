@@ -14,12 +14,16 @@ function getComputerChoice(){
 
 console.log(getComputerChoice());
 
-function playRound(computerSelection, playerSelection){
+function playRound(playerSelection, computerSelection){
     computerSelection = computerSelection.toLowerCase();
     playerSelection = playerSelection.toLowerCase();
-    let rock = 'rock';
-    let paper = 'paper';
-    let scissors = 'scissors';
+    const rock = 'rock';
+    const paper = 'paper';
+    const scissors = 'scissors';
+    const winMessage = 'You Win!';
+    const loseMessage =;
+    const tieMessage =;
+    
     if ((computerSelection === rock) &&  (playerSelection === rock)){
        return "Its a tie!";
     }else if((computerSelection === rock) &&  (playerSelection === paper)){
@@ -44,4 +48,23 @@ function playRound(computerSelection, playerSelection){
 let playerSelection = "rock";
 let computerSelection = getComputerChoice();
 
-console.log(playRound(computerSelection, playerSelection));
+console.log(playRound(playerSelection, computerSelection));
+
+/*
+check player selection
+
+rock
+if rock and scissors win
+if rock and paper lose
+else tie
+
+paper
+if paper and scissors lose
+if paper and rock win
+else tie
+
+scissors
+if scissors and rock lose
+if scissors and paper win
+else tie
+*/
