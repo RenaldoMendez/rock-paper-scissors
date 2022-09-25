@@ -1,5 +1,42 @@
+game();
+
+function game(){    
+    console.log('game executed');
+    const playerSelection = "paper";
+
+    let playerScore = 0;
+    let computerScore = 0;
+
+    for (let i = 0; i < 5; i++){
+        const result = playRound(playerSelection, getComputerChoice());
+        
+        if(result.includes('Win'))
+            playerScore++;
+        else if(result.includes('Lose'))
+            computerScore++;
+
+        console.log(`Your Score: ${playerScore} Computer's Score: ${computerScore}`);
+        
+        
+    }
+    const winner = 'Congratulations, you win!';
+    const loser = 'Game Over, you lost!';
+    const tieGame = 'Its a Tie!';
+    let gameResult;
+    if(playerScore > computerScore)
+        gameResult = winner;
+    else if(playerScore < computerScore)
+        gameResult = loser;
+    else   
+        gameResult = tieGame;
+
+    console.log(gameResult);
+    console.log('game execution finished');
+}
+
 function getComputerChoice(){
-    //return a randum integer from 1 to 3
+    console.log('getComputerChoice executed');
+    //return a random integer from 1 to 3
     let randomNumber = Math.floor(Math.random() * 3) + 1;
     let choice;
     switch(randomNumber){
@@ -9,46 +46,106 @@ function getComputerChoice(){
         break;
         default: choice = 'scissors';
     }
+    
+    console.log(`The random number is ${randomNumber}, computer chose ${choice}`);
     return choice;
+    
 }
 
-console.log(getComputerChoice());
 
 function playRound(playerSelection, computerSelection){
+    console.log('playRound executed');
+
     computerSelection = computerSelection.toLowerCase();
     playerSelection = playerSelection.toLowerCase();
+
     const rock = 'rock';
+    const paper = 'paper';
+    let decision;
+
+    switch(playerSelection)
+    {
+        case rock: 
+            decision = choseRock(computerSelection);
+            break;
+        case paper:
+            decision = chosePaper(computerSelection);
+            break;
+        default:
+            decision = choseScissors(computerSelection);
+    }
+    
+    return decision;
+}
+
+function choseRock(computerSelection){
+
     const paper = 'paper';
     const scissors = 'scissors';
     const winMessage = 'You Win!';
-    const loseMessage =;
-    const tieMessage =;
-    
-    if ((computerSelection === rock) &&  (playerSelection === rock)){
-       return "Its a tie!";
-    }else if((computerSelection === rock) &&  (playerSelection === paper)){
-        return "You Win! Paper beats Rock."
-    }else if((computerSelection === rock) &&  (playerSelection=== scissors)){
-        return "You Lose! Rock beats Scissors";
-    }else if((computerSelection === paper) &&  (playerSelection === paper)){
-        return "Its a tie!";
-    }else if((computerSelection=== paper) &&  (playerSelection=== rock)){
-        return "You Lose! Rock beats Scissors";
-    }else if((computerSelection === paper) &&  (playerSelection === scissors)){
-        return "You Win! Scissors beats paper."
-    }else if((computerSelection === scissors) &&  (playerSelection === scissors)){
-        return "It's a tie!"
-    }else if((computerSelection === scissors) &&  (playerSelection === rock)){
-        return "You Win! Rock beats Scissors."
-    }else if((computerSelection === scissors) &&  (playerSelection === paper)){
-        return "You Lose! Scissors beats Paper."
+    const loseMessage = 'You Lose!';
+    const tieMessage ="It's a Tie!";
+
+    switch(computerSelection)
+    {
+        case paper:
+            message = `${loseMessage} Paper beats Rock`;
+            break;
+        case scissors: 
+            message = `${winMessage} Rock beats Scissors`;
+            break;        
+        default:
+            message = tieMessage;
     }
+
+    return message;
 }
 
-let playerSelection = "rock";
-let computerSelection = getComputerChoice();
+function chosePaper(computerSelection){
 
-console.log(playRound(playerSelection, computerSelection));
+    const rock ='rock';
+    const scissors = 'scissors';
+    const winMessage = 'You Win!';
+    const loseMessage = 'You Lose!';
+    const tieMessage ="It's a Tie!";
+
+    switch(computerSelection)
+    {
+        case rock:
+            message = `${winMessage} Paper beats Rock`;
+            break;
+        case scissors: 
+            message = `${loseMessage} Scissors beats Paper`;
+            break;        
+        default:
+            message = tieMessage;
+    }
+
+    return message;
+}
+
+function choseScissors(computerSelection){
+    const rock = 'rock';
+    const paper = 'paper';
+    const winMessage = 'You Win!';
+    const loseMessage = 'You Lose!';
+    const tieMessage ="It's a Tie!";
+
+    switch(computerSelection)
+    {   
+        case rock:
+            message = `${loseMessage} Rock beats Scissors`;
+            break;
+        case paper: 
+            message = `${winMessage} Scissors beats Paper`;
+            break;        
+        default:
+            message = tieMessage;
+    }
+
+    return message;
+}
+
 
 /*
 check player selection
