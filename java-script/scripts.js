@@ -3,8 +3,10 @@
 const rockButton = document.querySelector('#rock_button');
 const paperButton = document.querySelector('#paper_button');
 const scissorsButton = document.querySelector('#scissors_button');
-
+let playerScore = 0;
+let computerScore = 0;
 //buttons.forEach(button => button.addEventListener('click', (e) => console.log(e)));
+   
     rockButton.addEventListener('click', () => {game('rock')});
     paperButton.addEventListener('click', () => {game('paper')});
     scissorsButton.addEventListener('click', () => {game('scissors')});
@@ -15,8 +17,8 @@ const scissorsButton = document.querySelector('#scissors_button');
 
 function game(playerSelection){    
 
-    let playerScore = 0;
-    let computerScore = 0;
+    
+
     let result = playRound(playerSelection, getComputerChoice());
         
         if(result[0].includes('Win'))
@@ -30,7 +32,8 @@ function game(playerSelection){
         Your Score: ${playerScore} Computer's Score: ${computerScore}`;
         div.appendChild(paragraph);
         
-    
+    if(playerScore >= 5 || computerScore >= 5){
+
     const winner = 'Congratulations, you win!';
     const loser = 'Game Over, you lost!';
     const tieGame = 'Its a Tie!';
@@ -45,6 +48,7 @@ function game(playerSelection){
     const paragraphTwo = document.createElement('p');
     paragraphTwo.TextContent = gameResult;
     div.appendChild(paragraphTwo);
+    }
 } 
 
 function getComputerChoice(){
