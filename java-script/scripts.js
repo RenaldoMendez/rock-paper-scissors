@@ -1,21 +1,20 @@
 game();
 
 function game(){    
-    console.log('game executed');
-    const playerSelection = "paper";
 
     let playerScore = 0;
     let computerScore = 0;
 
     for (let i = 0; i < 5; i++){
-        const result = playRound(playerSelection, getComputerChoice());
+        const result = playRound(getPlayerChoice(), getComputerChoice());
         
-        if(result.includes('Win'))
+        if(result[0].includes('Win'))
             playerScore++;
-        else if(result.includes('Lose'))
+        else if(result[0].includes('Lose'))
             computerScore++;
 
-        console.log(`Your Score: ${playerScore} Computer's Score: ${computerScore}`);
+        console.log(`${result[1]}
+        Your Score: ${playerScore} Computer's Score: ${computerScore}`);
         
         
     }
@@ -31,11 +30,9 @@ function game(){
         gameResult = tieGame;
 
     console.log(gameResult);
-    console.log('game execution finished');
 }
 
 function getComputerChoice(){
-    console.log('getComputerChoice executed');
     //return a random integer from 1 to 3
     let randomNumber = Math.floor(Math.random() * 3) + 1;
     let choice;
@@ -47,14 +44,34 @@ function getComputerChoice(){
         default: choice = 'scissors';
     }
     
-    console.log(`The random number is ${randomNumber}, computer chose ${choice}`);
     return choice;
     
 }
 
+function getPlayerChoice(){
+    let choice;
+    let proceed = true;
+    do{
+    choice = prompt('Choose your weapon; rock, paper, or scissors?');
+    
+    if (choice === null)
+        throw new Error("Game stopped");
+
+    //check if input is valid
+    if(choice.toLocaleLowerCase() === 'rock')
+        proceed = false;
+    else if(choice.toLocaleLowerCase() === 'paper')
+        proceed = false;
+    else if (choice.toLocaleLowerCase() === 'scissors')
+        proceed = false;
+
+    } while(proceed);
+    
+    choice.toLocaleLowerCase;
+    return choice;
+}
 
 function playRound(playerSelection, computerSelection){
-    console.log('playRound executed');
 
     computerSelection = computerSelection.toLowerCase();
     playerSelection = playerSelection.toLowerCase();
@@ -84,18 +101,21 @@ function choseRock(computerSelection){
     const scissors = 'scissors';
     const winMessage = 'You Win!';
     const loseMessage = 'You Lose!';
-    const tieMessage ="It's a Tie!";
-
+    const tieMessage ='It\'s a Tie!';
+    const message = [];
     switch(computerSelection)
     {
         case paper:
-            message = `${loseMessage} Paper beats Rock`;
+            message[0] = loseMessage 
+            message[1] = 'Paper beats Rock';
             break;
         case scissors: 
-            message = `${winMessage} Rock beats Scissors`;
+            message[0] = winMessage
+            message[1] = 'Rock beats Scissors';
             break;        
         default:
-            message = tieMessage;
+            message[0] = tieMessage;
+            message[1] = tieMessage;
     }
 
     return message;
@@ -108,17 +128,20 @@ function chosePaper(computerSelection){
     const winMessage = 'You Win!';
     const loseMessage = 'You Lose!';
     const tieMessage ="It's a Tie!";
-
+    const message = [];
     switch(computerSelection)
     {
         case rock:
-            message = `${winMessage} Paper beats Rock`;
+            message[0] = winMessage
+            message[1] = 'Paper beats Rock';
             break;
         case scissors: 
-            message = `${loseMessage} Scissors beats Paper`;
+            message[0] = loseMessage
+            message[1] = 'Scissors beats Paper';
             break;        
         default:
-            message = tieMessage;
+            message[0] = tieMessage;
+            message[1] = tieMessage;
     }
 
     return message;
@@ -130,17 +153,20 @@ function choseScissors(computerSelection){
     const winMessage = 'You Win!';
     const loseMessage = 'You Lose!';
     const tieMessage ="It's a Tie!";
-
+    const message = [];
     switch(computerSelection)
     {   
         case rock:
-            message = `${loseMessage} Rock beats Scissors`;
+            message[0] = loseMessage
+            message[1] = 'Rock beats Scissors';
             break;
         case paper: 
-            message = `${winMessage} Scissors beats Paper`;
+            message[0] = winMessage 
+            message[1] = 'Scissors beats Paper';
             break;        
         default:
-            message = tieMessage;
+            message[0] = tieMessage;
+            message[1] = tieMessage;
     }
 
     return message;
