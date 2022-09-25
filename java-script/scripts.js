@@ -24,9 +24,11 @@ function game(playerSelection){
         else if(result[0].includes('Lose'))
             computerScore++;
 
-        console.log(`${result[1]}
-        Your Score: ${playerScore} Computer's Score: ${computerScore}`);
-        
+        const div = document.querySelector('#results');
+        const paragraph = document.createElement('p');
+        paragraph.textContent = `${result[1]}
+        Your Score: ${playerScore} Computer's Score: ${computerScore}`;
+        div.appendChild(paragraph);
         
     
     const winner = 'Congratulations, you win!';
@@ -40,7 +42,9 @@ function game(playerSelection){
     else   
         gameResult = tieGame;
 
-    console.log(gameResult);
+    const paragraphTwo = document.createElement('p');
+    paragraphTwo.TextContent = gameResult;
+    div.appendChild(paragraphTwo);
 } 
 
 function getComputerChoice(){
