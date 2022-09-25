@@ -1,11 +1,19 @@
 game();
 
+const rockButton = document.querySelector('#rock_button');
+const paperButton = document.querySelector('#paper_button');
+const scissorsButton = document.querySelector('#scissors_button');
+
+rockButton.addEventListener('click',choseRock());
+paperButton.addEventListener('click',chosePaper());
+scissorsButton.addEventListener('click',choseScissors());
+
 function game(){    
 
     let playerScore = 0;
     let computerScore = 0;
 
-    for (let i = 0; i < 5; i++){
+    
         const result = playRound(getPlayerChoice(), getComputerChoice());
         
         if(result[0].includes('Win'))
@@ -17,7 +25,7 @@ function game(){
         Your Score: ${playerScore} Computer's Score: ${computerScore}`);
         
         
-    }
+    
     const winner = 'Congratulations, you win!';
     const loser = 'Game Over, you lost!';
     const tieGame = 'Its a Tie!';
@@ -47,7 +55,7 @@ function getComputerChoice(){
     return choice;
     
 }
-
+/*
 function getPlayerChoice(){
     let choice;
     let proceed = true;
@@ -70,6 +78,7 @@ function getPlayerChoice(){
     choice.toLocaleLowerCase;
     return choice;
 }
+*/
 
 function playRound(playerSelection, computerSelection){
 
