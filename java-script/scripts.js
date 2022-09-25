@@ -1,13 +1,17 @@
-game();
-
+//game();
+//const buttons = document.querySelectorAll('button');
 const rockButton = document.querySelector('#rock_button');
 const paperButton = document.querySelector('#paper_button');
 const scissorsButton = document.querySelector('#scissors_button');
 
-rockButton.addEventListener('click',choseRock());
-paperButton.addEventListener('click',chosePaper());
-scissorsButton.addEventListener('click',choseScissors());
+//buttons.forEach(button => button.addEventListener('click', (e) => console.log(e)));
 
+
+rockButton.addEventListener('click', () => {playRound('rock', getComputerChoice())});
+paperButton.addEventListener('click', () => {playRound('paper', getComputerChoice())});
+scissorsButton.addEventListener('click', () => {playRound('scissors', getComputerChoice())});
+
+/*
 function game(){    
 
     let playerScore = 0;
@@ -38,7 +42,8 @@ function game(){
         gameResult = tieGame;
 
     console.log(gameResult);
-}
+} 
+*/
 
 function getComputerChoice(){
     //return a random integer from 1 to 3
@@ -101,7 +106,7 @@ function playRound(playerSelection, computerSelection){
             decision = choseScissors(computerSelection);
     }
     
-    return decision;
+    console.log(`${decision[0]} ${decision[1]}`);
 }
 
 function choseRock(computerSelection){
