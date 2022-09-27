@@ -1,54 +1,45 @@
 
+
 //const buttons = document.querySelectorAll('button');
 const rockButton = document.querySelector('#rock_button');
 const paperButton = document.querySelector('#paper_button');
 const scissorsButton = document.querySelector('#scissors_button');
 let playerScore = 0;
 let computerScore = 0;
+let continueGame = true;
 //buttons.forEach(button => button.addEventListener('click', (e) => console.log(e)));
    
-    rockButton.addEventListener('click', () => {game('rock')});
-    paperButton.addEventListener('click', () => {game('paper')});
-    scissorsButton.addEventListener('click', () => {game('scissors')});
+    while(continueGame){
+    rockButton.addEventListener('click', () => {playRound('rock')});
+    paperButton.addEventListener('click', () => {playRound('paper')});
+    scissorsButton.addEventListener('click', () => {playRound('scissors')});
+    //check if game ends
+    decideWinner();
+    }
 
-
-
-
-
-function game(playerSelection){    
-
+function decideWinner(){  
     
-
-    let result = playRound(playerSelection, getComputerChoice());
-        
-        if(result[0].includes('Win'))
-            playerScore++;
-        else if(result[0].includes('Lose'))
-            computerScore++;
-
-        const div = document.querySelector('#results');
-        const paragraph = document.createElement('p');
-        paragraph.textContent = `${result[1]}
-        Your Score: ${playerScore} Computer's Score: ${computerScore}`;
-        div.appendChild(paragraph);
-        
+    //decide winner of the game
     if(playerScore >= 5 || computerScore >= 5){
 
-    const winner = 'Congratulations, you win!';
-    const loser = 'Game Over, you lost!';
-    const tieGame = 'Its a Tie!';
-    let gameResult;
-    if(playerScore > computerScore)
-        gameResult = winner;
-    else if(playerScore < computerScore)
-        gameResult = loser;
-    else   
-        gameResult = tieGame;
+        const winner = 'Congratulations, you win!';
+        const loser = 'Game Over, you lost!';
+        const tieGame = 'Its a Tie!';
+        let gameResult;
+        if(playerScore > computerScore)
+            gameResult = winner;
+        else if(playerScore < computerScore)
+            gameResult = loser;
+        else   
+            gameResult = tieGame;
 
-    const paragraphTwo = document.createElement('p');
-    paragraphTwo.TextContent = gameResult;
-    div.appendChild(paragraphTwo);
-    }
+        const paragraphTwo = document.createElement('p');
+        paragraphTwo.TextContent = gameResult;
+        div.appendChild(paragraphTwo);
+        //stop the game
+        continueGame = false;
+    }else 
+        return;
 } 
 
 function getComputerChoice(){
@@ -91,9 +82,9 @@ function getPlayerChoice(){
 }
 */
 
-function playRound(playerSelection, computerSelection){
+function playRound(playerSelection){
 
-    computerSelection = computerSelection.toLowerCase();
+    const computerSelection = getComputerChoice().toLowerCase();;
     playerSelection = playerSelection.toLowerCase();
 
     const rock = 'rock';
@@ -111,9 +102,21 @@ function playRound(playerSelection, computerSelection){
         default:
             decision = choseScissors(computerSelection);
     }
-    return decision;
     
+    
+    if(decision[0].includes('Win'))
+    playerScore++;
+    else if(decision[0].includes('Lose'))
+    computerScore++;
+
+    const div = document.querySelector('#results');
+    const paragraph = document.createElement('p');
+    paragraph.textContent = `${decision[1]}
+    Your Score: ${playerScore} Computer's Score: ${computerScore}`;
+    div.appendChild(paragraph);
 }
+
+
 
 function choseRock(computerSelection){
 
